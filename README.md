@@ -4,16 +4,6 @@ Stable Baselines3 SAC policy trained on Gymnasium `HalfCheetah-v5`.
 
 The environment includes a small anti-flip reward guard to discourage belly-slide exploit postures.
 
-## Videos
-
-### Before training
-
-<video controls src="videos/initial.mp4"></video>
-
-### After training
-
-<video controls src="videos/final.mp4"></video>
-
 ## What Was Done
 
 - Trained SAC with `MlpPolicy` for `300000` timesteps.
