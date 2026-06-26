@@ -1,30 +1,43 @@
-# half-cheetah-local-sac-test
+# SAC HalfCheetah-v5
 
-Minimal SAC training for Gymnasium `HalfCheetah-v5` with Stable Baselines3.
+Stable Baselines3 SAC policy trained on Gymnasium `HalfCheetah-v5`.
 
-PyTorch is pinned to `2.7.1+cu118` so the Quadro P520 can run CUDA kernels.
-The env adds a small anti-flip reward guard to stop belly-slide exploits.
+The environment includes a small anti-flip reward guard to discourage belly-slide exploit postures.
 
-## Setup
+## Videos
 
-```bash
-uv run --python 3.11 cheetah-checks
-```
+### Before training
 
-## Train
+<video controls src="videos/initial.mp4"></video>
+
+### After training
+
+<video controls src="videos/final.mp4"></video>
+
+## What Was Done
+
+- Trained SAC with `MlpPolicy` for `300000` timesteps.
+- Recorded a random policy rollout before training.
+- Recorded the trained policy rollout after training.
+- Saved the trained checkpoint as `models/sac_half_cheetah.zip`.
+
+## Evaluation
+
+Single deterministic rollout with seed `8`.
+
+| Metric | Value |
+| --- | ---: |
+| Steps | 1000 |
+| Return | 7031.927 |
+| Mean reward | 7.032 |
+| Mean x velocity | 7.465 |
+| Final x position | 373.190 |
+| Minimum torso height | 0.534 |
+| Maximum absolute root angle | 0.269 |
+| Fell | false |
+
+## Run
 
 ```bash
 uv run --python 3.11 cheetah-train
-```
-
-Outputs:
-
-- `videos/initial.mp4`
-- `videos/final.mp4`
-- `models/sac_half_cheetah.zip`
-
-Use fewer steps for a quick smoke test:
-
-```bash
-uv run --python 3.11 cheetah-train --steps 1000 --model-path /tmp/cheetah_smoke --initial-video /tmp/initial.mp4 --final-video /tmp/final.mp4
 ```
